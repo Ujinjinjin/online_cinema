@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.core.mail import send_mail
-from datetime import datetime
+from django.utils.timezone import now
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
@@ -15,7 +15,7 @@ import os
 
 
 class LongCharField(models.CharField):
-    "A basically unlimited-length CharField."
+    """A basically unlimited-length CharField."""
     description = _("Unlimited-length string")
 
     def __init__(self, *args, **kwargs):
@@ -32,20 +32,35 @@ class LongCharField(models.CharField):
         return super(models.CharField, self).formfield(**kwargs)
 
 
-class Member(models.Model):
-    ARTIST = 'ART'
-    DIRECTOR = 'DIR'
-    ROLE_CHOICES = (
-        (ARTIST, 'Artist'),
-        (DIRECTOR, 'Director')
-    )
-    first_name = LongCharField(default='First Name')
-    last_name = LongCharField(default='Last Name')
-    portrait = models.ImageField(upload_to=f'media/members/{str(first_name)[0]}', null=True, default=None)
-    role = models.CharField(max_length=4, choices=ROLE_CHOICES, default=ARTIST)
+class AccessLevel(models.Model):
+    tag = models.CharField(max_length=100, unique=True)
+    lvl = models.IntegerField(default=0, unique=True)
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}. {self.role}'
+        return f'{self.tag} ({self.lvl})'
+
+    class Meta:
+        verbose_name = _('access level')
+        verbose_name_plural = _('access levels')
+        db_table = '_AccessLevel'
+
+
+class Member(models.Model):
+    ACTOR = 'ACT'
+    DIRECTOR = 'DIR'
+    COMPOSER = 'COM'
+    ROLE_CHOICES = (
+        (ACTOR, 'Artist'),
+        (DIRECTOR, 'Director'),
+        (COMPOSER, 'Composer')
+    )
+    first_name = models.CharField(max_length=50, default='First Name')
+    last_name = models.CharField(max_length=50, default='Last Name')
+    portrait = models.ImageField(upload_to=f'media/members/{str(first_name)[0]}', null=True, default=None)
+    role_in_movie = models.CharField(max_length=4, choices=ROLE_CHOICES, default=ACTOR)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}. {self.role_in_movie}'
 
     class Meta:
         verbose_name = _('member')
@@ -54,7 +69,7 @@ class Member(models.Model):
 
 
 class Genre(models.Model):
-    tag = LongCharField()
+    tag = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return f'{self.tag}'
@@ -66,30 +81,19 @@ class Genre(models.Model):
 
 
 class Movie(models.Model):
-    FREE = 'FREE'
-    SILVER = 'SLVR'
-    GOLD = 'GOLD'
-    PLATINUM = 'PLTN'
-    ACCESS_LVL_CHOICES = (
-        (FREE, 'Free'),
-        (SILVER, 'Silver'),
-        (GOLD, 'Gold'),
-        (PLATINUM, 'Platinum')
-    )
-    name = LongCharField()
+    title = models.CharField(max_length=150)
     duration = models.IntegerField(default=0)
-    description = LongCharField()
+    movie_description = models.CharField(max_length=350)  # LongCharField()
     release_date = models.DateField()
-    poster = models.FileField(upload_to=f'media/movies/{str(name)} ({str(release_date)})')
-    trailer_url = LongCharField()
-    required_al = models.CharField(max_length=4, choices=ACCESS_LVL_CHOICES)
-    members = models.ManyToManyField(Member, null=True, default=None, db_table='_MovieMembers')
-    genres = models.ManyToManyField(Genre, null=True, default=None, db_table='_MovieGenres')
+    poster = models.FileField(upload_to=f'media/movies/{str(title)} ({str(release_date)})')
+    trailer_url = models.CharField(max_length=350)  # LongCharField()
     suggested = models.BooleanField(default=False)
-    # rating = models.FloatField(default=0)
+    access_lvl = models.ForeignKey(AccessLevel, on_delete=models.SET_DEFAULT, default=0)
+    members = models.ManyToManyField(Member, db_table='_MovieMembers')
+    genres = models.ManyToManyField(Genre, db_table='_MovieGenres')
 
     def __str__(self):
-        return f'{self.name} ({self.release_date})'
+        return f'{self.title} ({self.release_date})'
 
     class Meta:
         verbose_name = _('movie')
@@ -114,20 +118,10 @@ class Image(models.Model):
 
 
 class Subscription(models.Model):
-    FREE = 'FREE'
-    SILVER = 'SLVR'
-    GOLD = 'GOLD'
-    PLATINUM = 'PLTN'
-    ACCESS_LVL_CHOICES = (
-        (FREE, 'Free'),
-        (SILVER, 'Silver'),
-        (GOLD, 'Gold'),
-        (PLATINUM, 'Platinum')
-    )
     duration = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
-    access_level = models.CharField(max_length=4, choices=ACCESS_LVL_CHOICES)
     visible = models.BooleanField(default=False)
+    access_level = models.ForeignKey(AccessLevel, on_delete=models.SET_DEFAULT, default=0)
 
     def __str__(self):
         return f'{self.access_level} - {self.price}. ({self.duration} days).'
@@ -139,14 +133,15 @@ class Subscription(models.Model):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(_('email address'), unique=True)
-    first_name = LongCharField(default='First Name')
-    last_name = LongCharField(default='Last Name')
-    subscribed_date = models.DateField(default=datetime.today())
-    subscription = models.ForeignKey(Subscription, on_delete=models.SET_DEFAULT, default=None)
+    email = models.EmailField(_('email address'), unique=True, max_length=100)
+    first_name = models.CharField(max_length=350)  # LongCharField(default='First Name')
+    last_name = models.CharField(max_length=350)  # LongCharField(default='Last Name')
     activated = models.BooleanField(_('activated'), default=False)
     is_staff = models.BooleanField(_('staff'), default=False, editable=False)
-
+    is_superuser = models.BooleanField(_('superuser'), default=False, editable=False)
+    subscribed_date = models.DateField(default=now)
+    subscription = models.ForeignKey(Subscription, on_delete=models.SET_DEFAULT, default=None, null=True)
+    lang = models.CharField(_('language'), max_length=5, default='en-us')
     objects = UserManager()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -170,7 +165,7 @@ class MovieCard(models.Model):
     watched = models.BooleanField(default=False)
     want_to_watch = models.BooleanField(default=False)
     is_favorite = models.BooleanField(default=False)
-    personal_rating = models.SmallIntegerField(default=0)
+    liked = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
@@ -185,7 +180,7 @@ class MovieCard(models.Model):
 
 
 class PromoCode(models.Model):
-    code = models.CharField(max_length=15)
+    code = models.CharField(max_length=15, unique=True)
     quantity = models.IntegerField(default=0)
     subscription = models.ForeignKey(Subscription, on_delete=models.CASCADE)
 

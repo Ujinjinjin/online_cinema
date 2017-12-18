@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from django.conf.urls import url, include
+from django.urls import path, include
+# from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^admin/?', admin.site.urls),
-    url(r'^', include('client.urls')),
+    path('admin/', admin.site.urls),
+    path('', include('client.urls')),
 ]

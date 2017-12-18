@@ -1,0 +1,68 @@
+{% extends "client/base.html" %}
+
+{% block title %}{{ resources.title }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center" style="margin-top: 50px">
+        <div class="col-md-3">
+
+            <div class="container">
+                <!--Nav tabs-->
+                <ul class="nav nav-tabs nav-justified" style="margin-bottom: 15px">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#id_sign_in_form" role="tab">{{ resources.tab_sign_in }}</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#id_sign_up_form" role="tab">{{ resources.tab_sign_up }}</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <!--Sign in form-->
+                    <div id="id_sign_in_form" class="tab-pane fade in show active" role="tabpanel">
+                        <form class="form-signin" role="form" action="{% url 'client:sign_in'%}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_sign_in_email">{{ resources.label_email }}</label>
+                                <input type="email" class="form-control" id="id_sign_in_email" name="email" placeholder="{{ resources.placeholder_email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_sign_in_password">{{ resources.label_password }}</label>
+                                <input type="password" class="form-control" id="id_sign_in_password" name="password" placeholder="{{ resources.placeholder_password }}">
+                            </div>
+                            <div style="text-align:center; margin-bottom: 15px">
+                                <a href="{% url 'client:restore' %}"><u>{{ resources.link_recovery_password }}</u></a>
+                            </div>
+                            <div style="text-align:center;">
+                                <button type="submit" class="btn btn-primary">{{ resources.button_login }}</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--Sign up form-->
+                    <div id="id_sign_up_form" class="tab-pane fade" role="tabpanel">
+                        <form class="form-signup" role="form" action="{% url 'client:sign_up'%}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_sign_up_email">{{ resources.label_email }}<span style="color: red">*</span></label>
+                                <input type="email" class="form-control" id="id_sign_up_email" name="email" placeholder="{{ resources.placeholder_email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_sign_up_password">{{ resources.label_password }}<span style="color: red">*</span></label>
+                                <input type="password" class="form-control" id="id_sign_up_password" name="password" placeholder="{{ resources.placeholder_password }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_sign_up_first_name">{{ resources.label_first_name }}</label>
+                                <input type="text" class="form-control" id="id_sign_up_first_name" name="first_name" placeholder="{{ resources.placeholder_first_name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_sign_up_last_name">{{ resources.label_last_name }}</label>
+                                <input type="text" class="form-control" id="id_sign_up_last_name" name="last_name" placeholder="{{ resources.placeholder_last_name }}">
+                            </div>
+                            <div style="text-align:center;">
+                                <button type="submit" class="btn btn-primary">{{ resources.button_register }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
