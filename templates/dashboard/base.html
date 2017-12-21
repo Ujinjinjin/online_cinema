@@ -1,0 +1,250 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block title %}Online Cinema | Dashboard{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'dashboard/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'dashboard/css/dashboard.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="collapse navbar-collapse" id="id_navbar">
+                <a class="navbar-brand" href="{% url 'dashboard:index' %}">Online Cinema | Dashboard</a>
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                </ul>
+                {% if request.user.is_staff %}
+                <ul class="navbar-nav my-2 my-sm-0">
+                    <li class="nav-item"><span class="navbar-text" style="color: azure">{{ user.first_name }} {{ user.last_name }}</span></li>
+                    <li class="nav-item"><a href="{% url 'client:sign_out' %}" class="nav-link">{% if request.session.lang == 'ru-ru' %}Выход{% else %}Sign Out{% endif %}</a></li>
+                </ul>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+        {% if request.user.is_staff %}
+            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+                <ul class="nav nav-pills flex-column">
+
+                    <li class="nav-item">
+                        <a class="nav-link {% block overview_active %}{% endblock %}" href="{% url 'dashboard:index' %}">Overview <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <div id="accordion" role="tablist">
+                    <!--Simple Reports-->
+                        <div class="item">
+                            <a class="nav-link" data-toggle="collapse" href="#simple_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Simple Reports
+                            </a>
+                            <div id="simple_reports_collapse" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'access_level' %}">Access Level</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'member' %}">Member</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'genre' %}">Genre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie' %}">Movie</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_member' %}">MovieMember</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_genre' %}">MovieGenre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'image' %}">Image</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'subscription' %}">Subscription</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'user' %}">User</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_card' %}">MovieCard</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'promo_code' %}">PromoCode</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'user_promo_code' %}">UserPromoCode</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <!--Interactive Reports-->
+                        <div class="item">
+                            <a class="nav-link" data-toggle="collapse" href="#interactive_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Interactive Reports
+                            </a>
+                            <div id="interactive_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Access Level</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Member</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Genre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Movie</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieMember</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieGenre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Image</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Subscription</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">User</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieCard</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">PromoCode</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <!--Reports with forms-->
+                        <div class="item">
+                            <a class="nav-link" data-toggle="collapse" href="#form_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Reports With Forms
+                            </a>
+                            <div id="form_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Access Level</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Member</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Genre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Movie</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieMember</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieGenre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Image</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Subscription</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">User</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieCard</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">PromoCode</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <!--Charts Reports-->
+                        <div class="item">
+                            <a class="nav-link" data-toggle="collapse" href="#chart_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Charts Reports
+                            </a>
+                            <div id="chart_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                <ul class="nav nav-pills flex-column">
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Access Level</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Member</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Genre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Movie</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieMember</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieGenre</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Image</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">Subscription</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">User</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">MovieCard</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">PromoCode</a>
+                                    </li>
+                                    <li class="nav-item" style="margin-left: 10%">
+                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+              </ul>
+            </nav>
+        {% endif %}
+        {% block body %}{% endblock %}
+
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "dashboard/js/jquery.min.js" %}"><\/script>')</script>
+    <script src="{% static 'dashboard/js/popper.min.js' %}"></script>
+    <script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

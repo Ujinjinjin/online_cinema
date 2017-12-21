@@ -23,6 +23,7 @@ class RuRu:
     SUCCESS_EMAIL_CONFIRMED = 'Великолепно! Ваша почта успешно подтверждена!'
     SUCCESS_PASSWORD_CHANGED = 'Великолепно! Ваш пароль успешно изменен!'
 
+    WARNING_REQUIRED_ADMIN = 'Внимание! Пожалуйста, авторизуйтесь под своим логином и паролем администратора.'
     WARNING_SOMETHING_WENT_WRONG = 'Внимание! Что-то пошло не так. Примите наши извинения и повторите еще раз.'
 
     PAGE_INDEX = {'button_submit': 'Подтвердить',
@@ -87,7 +88,17 @@ class EnUs:
     SUCCESS_EMAIL_CONFIRMED = 'Congratulations! Your email successfully confirmed.'
     SUCCESS_PASSWORD_CHANGED = 'Congratulations! Your password successfully changed!'
 
+    WARNING_REQUIRED_ADMIN = 'Warning! Please log in with your admin account email and password.'
     WARNING_SOMETHING_WENT_WRONG = 'Warning! Something went wrong. Please forgive us and try again.'
+
+    PAGE_DASHBOARD_SIGN_IN = {'button_login': 'Login',
+                              'label_email': 'Email',
+                              'label_password': 'Password',
+                              'placeholder_email': 'Enter email...',
+                              'placeholder_password': 'Enter password...',
+                              'tab_sign_in': 'Sign In',
+                              'title': 'Online Cinema | Dashboard Sign In',
+                              }
 
     PAGE_INDEX = {'button_submit': 'Submit',
                   'label_file': 'Choose file',
@@ -137,13 +148,12 @@ __language_codes = {
 
 
 def get_resources(request=None):
-    try:
-        if request.user.is_authenticated:
-            return __language_codes[request.user.lang]
-        else:
-            return __language_codes[request.session['lang']]
-    except KeyError:
-        return __language_codes['en-us']
+    if request.user.is_authenticated:
+        language_set = __language_codes.get(request.user.lang, 'en-us')
+        return language_set
+    else:
+        language_set = __language_codes.get(request.session.get('lang', 'en-us'), 'en-us')
+        return language_set
 
 
 if __name__ == '__main__':

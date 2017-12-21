@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+
+{% block body %}
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+      <h1>Simple report</h1>
+
+      <h2>{{ title }}</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                {% for header in headers %}
+                    <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in table %}
+                <tr>
+                    {% for value in row %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+{% endblock %}

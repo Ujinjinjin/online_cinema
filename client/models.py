@@ -26,7 +26,7 @@ class LongCharField(models.CharField):
         return 'LongCharField'
 
     def db_type(self, connection):
-        return 'varchar(max)'
+        return 'nvarchar(max)'
 
     def formfield(self, **kwargs):
         return super(models.CharField, self).formfield(**kwargs)
@@ -56,7 +56,7 @@ class Member(models.Model):
     )
     first_name = models.CharField(max_length=50, default='First Name')
     last_name = models.CharField(max_length=50, default='Last Name')
-    portrait = models.ImageField(upload_to=f'media/members/{str(first_name)[0]}', null=True, default=None)
+    portrait = models.ImageField(upload_to=f'media/members/', null=True, default=None)
     role_in_movie = models.CharField(max_length=4, choices=ROLE_CHOICES, default=ACTOR)
 
     def __str__(self):
@@ -83,14 +83,14 @@ class Genre(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=150)
     duration = models.IntegerField(default=0)
-    movie_description = models.CharField(max_length=350)  # LongCharField()
+    movie_description = LongCharField()  # models.CharField(max_length=350)  # LongCharField()
     release_date = models.DateField()
-    poster = models.FileField(upload_to=f'media/movies/{str(title)} ({str(release_date)})')
-    trailer_url = models.CharField(max_length=350)  # LongCharField()
+    poster = models.FileField(upload_to='media/movies/', null=True)
+    trailer_url = LongCharField()  # models.CharField(max_length=350)  # LongCharField()
     suggested = models.BooleanField(default=False)
     access_lvl = models.ForeignKey(AccessLevel, on_delete=models.SET_DEFAULT, default=0)
-    members = models.ManyToManyField(Member, db_table='_MovieMembers')
-    genres = models.ManyToManyField(Genre, db_table='_MovieGenres')
+    # members = models.ManyToManyField(Member, db_table='_MovieMember')
+    # genres = models.ManyToManyField(Genre, db_table='_MovieGenre')
 
     def __str__(self):
         return f'{self.title} ({self.release_date})'
@@ -101,9 +101,37 @@ class Movie(models.Model):
         db_table = '_Movie'
 
 
+class MovieMember(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{str(self.movie)} - {str(self.member)}'
+
+    class Meta:
+        verbose_name = _('movie_member')
+        verbose_name_plural = _('movie_members')
+        db_table = '_MovieMember'
+        unique_together = ('movie', 'member')
+
+
+class MovieGenre(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{str(self.movie)} - {str(self.genre)}'
+
+    class Meta:
+        verbose_name = _('movie_genre')
+        verbose_name_plural = _('movie_genre')
+        db_table = '_MovieGenre'
+        unique_together = ('movie', 'genre')
+
+
 class Image(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
-    file = models.ImageField(upload_to=f'media/movies/{str(movie)})/images')
+    file = models.ImageField(upload_to=f'media/images/')
 
     def __str__(self):
         return f'{self.file.name.replace("media/", "")}'
@@ -134,8 +162,8 @@ class Subscription(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True, max_length=100)
-    first_name = models.CharField(max_length=350)  # LongCharField(default='First Name')
-    last_name = models.CharField(max_length=350)  # LongCharField(default='Last Name')
+    first_name = LongCharField()  # models.CharField(max_length=350)  # LongCharField(default='First Name')
+    last_name = LongCharField()  # models.CharField(max_length=350)  # LongCharField(default='Last Name')
     activated = models.BooleanField(_('activated'), default=False)
     is_staff = models.BooleanField(_('staff'), default=False, editable=False)
     is_superuser = models.BooleanField(_('superuser'), default=False, editable=False)

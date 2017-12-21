@@ -5,18 +5,14 @@ from django.conf.urls import url
 # from django.urls import path, re_path
 from . import views
 
-app_name = 'client'
+app_name = 'dashboard'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^activate&(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/?$', views.activate, name='activate'),
-    url(r'^change_lang&lang=(?P<lang_code>[a-zA-Z]{2}-[a-zA-Z]{2})/?$', views.change_lang, name='change_lang'),
-    url(r'^movie/(?P<mov_id>\d+)/?$', views.movie, name='movie'),
-    url(r'^reset_password&(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,30})/?$', views.reset_password, name='reset_password'),
-    url(r'^restore/?$', views.restore, name='restore'),
+    url(r'^interactive_report/(?P<table_name>[A-Za-z_ ]+)/?$', views.interactive_report, name='interactive_report'),
     url(r'^sign_in/?$', views.sign_in, name='sign_in'),
-    url(r'^sign_out/?$', views.sign_out, name='sign_out'),
-    url(r'^sign_up/?$', views.sign_up, name='sign_up'),
+    url(r'^simple_report/(?P<table_name>[A-Za-z_ ]+)/?$', views.simple_report, name='simple_report'),
+    # url(r'^sign_in/?$', views.sign_in, name='sign_in'),
 ]
 
 # urlpatterns = [

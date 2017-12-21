@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'client.apps.ClientConfig'
+    'client.apps.ClientConfig',
+    'dashboard.apps.DashboardConfig'
 ]
 
 MIDDLEWARE = [
@@ -74,12 +75,13 @@ WSGI_APPLICATION = 'online_cinema.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'sql_server.pyodbc',
+        # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': 'data-bat',
-        'USER': 'ujinjinjin',
-        'PASSWORD': 'bdvtARdSYDRpB7fLJkpb',
-        'HOST': 'bat-server.database.windows.net',
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
         'PORT': '1433',
 
         'OPTIONS': {

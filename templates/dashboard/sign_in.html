@@ -1,0 +1,39 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}{{ resources.title }}{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row justify-content-center" style="margin-top: 50px">
+        <div class="col-md-3">
+
+            <div class="container">
+                <!--Nav tabs-->
+                <ul class="nav nav-tabs nav-justified" style="margin-bottom: 15px">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#id_sign_in_form" role="tab">{{ resources.tab_sign_in }}</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <!--Sign in form-->
+                    <div id="id_sign_in_form" class="tab-pane fade in show active" role="tabpanel">
+                        <form class="form-signin" role="form" action="{% url 'dashboard:sign_in'%}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_sign_in_email">{{ resources.label_email }}</label>
+                                <input type="email" class="form-control" id="id_sign_in_email" name="email" placeholder="{{ resources.placeholder_email }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="id_sign_in_password">{{ resources.label_password }}</label>
+                                <input type="password" class="form-control" id="id_sign_in_password" name="password" placeholder="{{ resources.placeholder_password }}">
+                            </div>
+                            <div style="text-align:center;">
+                                <button type="submit" class="btn btn-primary">{{ resources.button_login }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
