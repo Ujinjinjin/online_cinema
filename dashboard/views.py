@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
 from django.db.utils import IntegrityError
@@ -23,8 +23,40 @@ def index(request):
         return redirect('dashboard:sign_in')
 
 
-def interactive_report(request):
-    return None
+def interactive_report(request, table_name):
+    if request.user.is_authenticated and request.user.is_staff:
+        table = tables[table_name]['table']
+        headers = tables[table_name]['uid']
+        title = tables[table_name]['title']
+        fields = ', '.join(tables[table_name]['fields'])
+        cursor = connection.cursor()
+        cursor.execute(f'SELECT {fields} FROM {table} ORDER BY id')
+        rows = cursor.fetchall()
+        return render(request, 'dashboard/interactive_report.html', context={'title': title,
+                                                                             'headers': headers,
+                                                                             'table': rows,
+                                                                             })
+    else:
+        return redirect('dashboard:sign_in')
+
+
+def report_with_form(request, table_name):
+    if request.user.is_authenticated and request.user.is_staff:
+        table = tables[table_name]['table']
+        headers = tables[table_name]['uid']
+        title = tables[table_name]['title']
+        fields = ', '.join(tables[table_name]['fields'])
+        admin_section = tables[table_name]['admin_section']
+        cursor = connection.cursor()
+        cursor.execute(f'SELECT {fields} FROM {table} ORDER BY id')
+        rows = cursor.fetchall()
+        return render(request, 'dashboard/report_with_form.html', context={'title': title,
+                                                                           'headers': headers,
+                                                                           'table': rows,
+                                                                           'admin_section': admin_section,
+                                                                           })
+    else:
+        return redirect('dashboard:sign_in')
 
 
 def sign_in(request):
@@ -50,11 +82,11 @@ def sign_in(request):
 
 def simple_report(request, table_name):
     if request.user.is_authenticated and request.user.is_staff:
-        select_from = tables[table_name]['select_from']
+        view = tables[table_name]['view']
         headers = tables[table_name]['uid']
         title = tables[table_name]['title']
         cursor = connection.cursor()
-        cursor.execute(f'SELECT * FROM {select_from} ORDER BY id')
+        cursor.execute(f'SELECT * FROM {view} ORDER BY id')
         rows = cursor.fetchall()
         return render(request, 'dashboard/simple_report.html', context={'title': title,
                                                                         'headers': headers,

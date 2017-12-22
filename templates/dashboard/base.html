@@ -49,7 +49,7 @@
                             <a class="nav-link" data-toggle="collapse" href="#simple_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
                                 Simple Reports
                             </a>
-                            <div id="simple_reports_collapse" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div id="simple_reports_collapse" class="collapse {% block show_simple %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
                                         <a class="nav-link" href="{% url 'dashboard:simple_report' 'access_level' %}">Access Level</a>
@@ -95,43 +95,43 @@
                             <a class="nav-link" data-toggle="collapse" href="#interactive_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
                                 Interactive Reports
                             </a>
-                            <div id="interactive_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div id="interactive_reports_collapse" class="collapse {% block show_interactive %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Access Level</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'access_level' %}">Access Level</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Member</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'member' %}">Member</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Genre</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'genre' %}">Genre</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Movie</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie' %}">Movie</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieMember</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_member' %}">MovieMember</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieGenre</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_genre' %}">MovieGenre</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Image</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'image' %}">Image</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Subscription</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'subscription' %}">Subscription</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">User</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'user' %}">User</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieCard</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_card' %}">MovieCard</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">PromoCode</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'promo_code' %}">PromoCode</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'user_promo_code' %}">UserPromoCode</a>
                                     </li>
                                 </ul>
                             </div>
@@ -141,43 +141,43 @@
                             <a class="nav-link" data-toggle="collapse" href="#form_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
                                 Reports With Forms
                             </a>
-                            <div id="form_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div id="form_reports_collapse" class="collapse {% block show_forms %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Access Level</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'access_level' %}">Access Level</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Member</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'member' %}">Member</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Genre</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'genre' %}">Genre</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Movie</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie' %}">Movie</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieMember</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_member' %}">MovieMember</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieGenre</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_genre' %}">MovieGenre</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Image</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'image' %}">Image</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Subscription</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'subscription' %}">Subscription</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">User</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'user' %}">User</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieCard</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_card' %}">MovieCard</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">PromoCode</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'promo_code' %}">PromoCode</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'user_promo_code' %}">UserPromoCode</a>
                                     </li>
                                 </ul>
                             </div>
@@ -187,7 +187,7 @@
                             <a class="nav-link" data-toggle="collapse" href="#chart_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
                                 Charts Reports
                             </a>
-                            <div id="chart_reports_collapse" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div id="chart_reports_collapse" class="collapse {% block show_charts %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
                                         <a class="nav-link" href="#">Access Level</a>

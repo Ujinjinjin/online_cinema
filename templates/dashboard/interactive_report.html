@@ -1,15 +1,16 @@
 {% extends 'dashboard/base.html' %}
-{% block show_simple %}show{% endblock %}
+{% block show_interactive %}show{% endblock %}
 
 {% block body %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-      <h1>Простой отчет</h1>
+      <h1>Интерактивный отчет</h1>
 
       <h2>{{ title }}</h2>
       <div class="table-responsive">
         <table class="table table-striped">
           <thead>
             <tr>
+                <th>Редактировать</th>
                 {% for header in headers %}
                     <th>{{ header }}</th>
                 {% endfor %}
@@ -18,8 +19,9 @@
           <tbody>
             {% for row in table %}
                 <tr>
+                    <td><button type="submit" class="btn btn-primary">Сохранить</button></td>
                     {% for value in row %}
-                        <td>{{ value }}</td>
+                        <td><input class="form-control" type="text" value="{{ value }}"></td>
                     {% endfor %}
                 </tr>
             {% endfor %}
