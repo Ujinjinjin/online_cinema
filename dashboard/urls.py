@@ -9,6 +9,7 @@ app_name = 'dashboard'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^chart_report/(?P<chart_name>[A-Za-z_ \d]+)/?$', views.chart_report, name='chart_report'),
     url(r'^interactive_report/(?P<table_name>[A-Za-z_ ]+)/?$', views.interactive_report, name='interactive_report'),
     url(r'^report_with_form/(?P<table_name>[A-Za-z_ ]+)/?$', views.report_with_form, name='report_with_form'),
     url(r'^sign_in/?$', views.sign_in, name='sign_in'),

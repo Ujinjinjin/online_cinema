@@ -13,6 +13,14 @@ from client.models import *
 from .models import *
 from django.db import connection
 from .string_resources import get_resources
+from .chart_creator import *
+
+
+def chart_report(request, chart_name):
+    chart_list[chart_name]['method']()
+    title = chart_list[chart_name]['title']
+    link = chart_list[chart_name]['link']
+    return render(request, 'dashboard/chart_report.html', context={'title': title, 'link': link})
 
 
 def index(request):

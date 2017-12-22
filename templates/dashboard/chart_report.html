@@ -1,0 +1,10 @@
+{% extends 'dashboard/base.html' %}
+{% block show_charts %}show{% endblock %}
+
+{% block body %}
+    <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+        <h1>Графический Отчет</h1>
+        <h2>{{ title }}</h2>
+        <img style="max-width: 95%" class="img-fluid" src="{{ link }}">
+    </main>
+{% endblock %}

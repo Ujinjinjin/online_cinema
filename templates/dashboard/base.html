@@ -47,7 +47,7 @@
                     <!--Simple Reports-->
                         <div class="item">
                             <a class="nav-link" data-toggle="collapse" href="#simple_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
-                                Simple Reports
+                                Простые Отчеты
                             </a>
                             <div id="simple_reports_collapse" class="collapse {% block show_simple %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
@@ -93,7 +93,7 @@
                     <!--Interactive Reports-->
                         <div class="item">
                             <a class="nav-link" data-toggle="collapse" href="#interactive_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
-                                Interactive Reports
+                                Интерактивные Отчеты
                             </a>
                             <div id="interactive_reports_collapse" class="collapse {% block show_interactive %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
@@ -139,7 +139,7 @@
                     <!--Reports with forms-->
                         <div class="item">
                             <a class="nav-link" data-toggle="collapse" href="#form_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
-                                Reports With Forms
+                                Отчеты с Формами
                             </a>
                             <div id="form_reports_collapse" class="collapse {% block show_forms %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
@@ -185,45 +185,18 @@
                     <!--Charts Reports-->
                         <div class="item">
                             <a class="nav-link" data-toggle="collapse" href="#chart_reports_collapse" aria-expanded="true" aria-controls="collapseOne">
-                                Charts Reports
+                                Графические Отчеты
                             </a>
                             <div id="chart_reports_collapse" class="collapse {% block show_charts %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Access Level</a>
+                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_liked_mov' %}">Топ 10 фильмов по количеству одобрений</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Member</a>
+                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_wanted_mov' %}">Топ 10 желаемых фильмов</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Genre</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Movie</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieMember</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieGenre</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Image</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">Subscription</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">User</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">MovieCard</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">PromoCode</a>
-                                    </li>
-                                    <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="#">UserPromoCode</a>
+                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_watched_mov' %}">Топ 10 фильмов по количеству просмотров</a>
                                     </li>
                                 </ul>
                             </div>
