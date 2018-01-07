@@ -1,5 +1,18 @@
 {% extends 'dashboard/base.html' %}
 {% block show_simple %}show{% endblock %}
+{% block s_al %}{% if table_name == 'access_level' %}active{% endif %}{% endblock %}
+{% block s_mem %}{% if table_name == 'member' %}active{% endif %}{% endblock %}
+{% block s_gen %}{% if table_name == 'genre' %}active{% endif %}{% endblock %}
+{% block s_mov %}{% if table_name == 'movie' %}active{% endif %}{% endblock %}
+{% block s_mm %}{% if table_name == 'movie_member' %}active{% endif %}{% endblock %}
+{% block s_mg %}{% if table_name == 'movie_genre' %}active{% endif %}{% endblock %}
+{% block s_img %}{% if table_name == 'image' %}active{% endif %}{% endblock %}
+{% block s_sub %}{% if table_name == 'subscription' %}active{% endif %}{% endblock %}
+{% block s_user %}{% if table_name == 'user' %}active{% endif %}{% endblock %}
+{% block s_mc %}{% if table_name == 'movie_card' %}active{% endif %}{% endblock %}
+{% block s_pr %}{% if table_name == 'promo_code' %}active{% endif %}{% endblock %}
+{% block s_upr %}{% if table_name == 'user_promo_code' %}active{% endif %}{% endblock %}
+
 
 {% block body %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
@@ -7,7 +20,7 @@
 
       <h2>{{ title }}</h2>
       <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-bordered">
           <thead>
             <tr>
                 {% for header in headers %}

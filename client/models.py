@@ -3,6 +3,7 @@
 
 from __future__ import unicode_literals
 
+from django.contrib import admin
 from django.db import models
 from django.core.mail import send_mail
 from django.utils.timezone import now
@@ -83,7 +84,7 @@ class Genre(models.Model):
 class Movie(models.Model):
     title = models.CharField(max_length=150)
     duration = models.IntegerField(default=0)
-    movie_description = LongCharField()  # models.CharField(max_length=350)  # LongCharField()
+    movie_description = models.TextField()  # models.CharField(max_length=350)  # LongCharField()
     release_date = models.DateField()
     poster = models.FileField(upload_to='media/movies/', null=True)
     trailer_url = LongCharField()  # models.CharField(max_length=350)  # LongCharField()
@@ -109,8 +110,8 @@ class MovieMember(models.Model):
         return f'{str(self.movie)} - {str(self.member)}'
 
     class Meta:
-        verbose_name = _('movie_member')
-        verbose_name_plural = _('movie_members')
+        verbose_name = _('movie member')
+        verbose_name_plural = _('movie members')
         db_table = '_MovieMember'
         unique_together = ('movie', 'member')
 
@@ -123,8 +124,8 @@ class MovieGenre(models.Model):
         return f'{str(self.movie)} - {str(self.genre)}'
 
     class Meta:
-        verbose_name = _('movie_genre')
-        verbose_name_plural = _('movie_genre')
+        verbose_name = _('movie genre')
+        verbose_name_plural = _('movie genres')
         db_table = '_MovieGenre'
         unique_together = ('movie', 'genre')
 
@@ -234,3 +235,8 @@ class UserPromoCode(models.Model):
         verbose_name_plural = _("user's promo codes")
         db_table = '_UserPromoCode'
         unique_together = (('user', 'promo_code'),)
+
+
+class UserAdmin(admin.ModelAdmin):
+    exclude = ('password', 'last_login', 'lang', 'user_permissions', 'groups')
+

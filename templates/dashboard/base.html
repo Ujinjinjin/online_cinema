@@ -52,40 +52,40 @@
                             <div id="simple_reports_collapse" class="collapse {% block show_simple %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'access_level' %}">Access Level</a>
+                                        <a class="nav-link {% block s_al %}{% endblock %}" href="{% url 'dashboard:simple_report' 'access_level' %}">Уровни доступа</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'member' %}">Member</a>
+                                        <a class="nav-link {% block s_mem %}{% endblock %}" href="{% url 'dashboard:simple_report' 'member' %}">Участники фильмов</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'genre' %}">Genre</a>
+                                        <a class="nav-link {% block s_gen %}{% endblock %}" href="{% url 'dashboard:simple_report' 'genre' %}">Жанры</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie' %}">Movie</a>
+                                        <a class="nav-link {% block s_mov %}{% endblock %}" href="{% url 'dashboard:simple_report' 'movie' %}">Фильмы</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_member' %}">MovieMember</a>
+                                        <a class="nav-link {% block s_mm %}{% endblock %}" href="{% url 'dashboard:simple_report' 'movie_member' %}">Участник/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_genre' %}">MovieGenre</a>
+                                        <a class="nav-link {% block s_mg %}{% endblock %}" href="{% url 'dashboard:simple_report' 'movie_genre' %}">Жанр/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'image' %}">Image</a>
+                                        <a class="nav-link {% block s_img %}{% endblock %}" href="{% url 'dashboard:simple_report' 'image' %}">Изображение</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'subscription' %}">Subscription</a>
+                                        <a class="nav-link {% block s_sub %}{% endblock %}" href="{% url 'dashboard:simple_report' 'subscription' %}">Подписка</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'user' %}">User</a>
+                                        <a class="nav-link {% block s_user %}{% endblock %}" href="{% url 'dashboard:simple_report' 'user' %}">Пользователь</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'movie_card' %}">MovieCard</a>
+                                        <a class="nav-link {% block s_mc %}{% endblock %}" href="{% url 'dashboard:simple_report' 'movie_card' %}">Карточка фильма</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'promo_code' %}">PromoCode</a>
+                                        <a class="nav-link {% block s_pr %}{% endblock %}" href="{% url 'dashboard:simple_report' 'promo_code' %}">Промо код</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:simple_report' 'user_promo_code' %}">UserPromoCode</a>
+                                        <a class="nav-link {% block s_upr %}{% endblock %}" href="{% url 'dashboard:simple_report' 'user_promo_code' %}">Промо коды пользователей</a>
                                     </li>
                                 </ul>
                             </div>
@@ -98,40 +98,40 @@
                             <div id="interactive_reports_collapse" class="collapse {% block show_interactive %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'access_level' %}">Access Level</a>
+                                        <a class="nav-link {% block i_al %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'access_level' %}">Уровни доступа</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'member' %}">Member</a>
+                                        <a class="nav-link {% block i_mem %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'member' %}">Участники фильмов</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'genre' %}">Genre</a>
+                                        <a class="nav-link {% block i_gen %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'genre' %}">Жанры</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie' %}">Movie</a>
+                                        <a class="nav-link {% block i_mov %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'movie' %}">Фильмы</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_member' %}">MovieMember</a>
+                                        <a class="nav-link {% block i_mm %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'movie_member' %}">Участник/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_genre' %}">MovieGenre</a>
+                                        <a class="nav-link {% block i_mg %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'movie_genre' %}">Жанр/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'image' %}">Image</a>
+                                        <a class="nav-link {% block i_img %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'image' %}">Изображение</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'subscription' %}">Subscription</a>
+                                        <a class="nav-link {% block i_sub %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'subscription' %}">Подписка</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'user' %}">User</a>
+                                        <a class="nav-link {% block i_user %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'user' %}">Пользователь</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'movie_card' %}">MovieCard</a>
+                                        <a class="nav-link {% block i_mc %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'movie_card' %}">Карточка фильма</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'promo_code' %}">PromoCode</a>
+                                        <a class="nav-link {% block i_pr %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'promo_code' %}">Промо код</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:interactive_report' 'user_promo_code' %}">UserPromoCode</a>
+                                        <a class="nav-link {% block i_upr %}{% endblock %}" href="{% url 'dashboard:interactive_report' 'user_promo_code' %}">Промо коды пользователей</a>
                                     </li>
                                 </ul>
                             </div>
@@ -144,40 +144,40 @@
                             <div id="form_reports_collapse" class="collapse {% block show_forms %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'access_level' %}">Access Level</a>
+                                        <a class="nav-link {% block f_al %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'access_level' %}">Уровни доступа</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'member' %}">Member</a>
+                                        <a class="nav-link {% block f_mem %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'member' %}">Участники фильмов</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'genre' %}">Genre</a>
+                                        <a class="nav-link {% block f_gen %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'genre' %}">Жанры</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie' %}">Movie</a>
+                                        <a class="nav-link {% block f_mov %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'movie' %}">Фильмы</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_member' %}">MovieMember</a>
+                                        <a class="nav-link {% block f_mm %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'movie_member' %}">Участник/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_genre' %}">MovieGenre</a>
+                                        <a class="nav-link {% block f_mg %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'movie_genre' %}">Жанр/Фильм</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'image' %}">Image</a>
+                                        <a class="nav-link {% block f_img %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'image' %}">Изображение</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'subscription' %}">Subscription</a>
+                                        <a class="nav-link {% block f_sub %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'subscription' %}">Подписка</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'user' %}">User</a>
+                                        <a class="nav-link {% block f_user %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'user' %}">Пользователь</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'movie_card' %}">MovieCard</a>
+                                        <a class="nav-link {% block f_mc %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'movie_card' %}">Карточка фильма</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'promo_code' %}">PromoCode</a>
+                                        <a class="nav-link {% block f_pr %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'promo_code' %}">Промо код</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:report_with_form' 'user_promo_code' %}">UserPromoCode</a>
+                                        <a class="nav-link {% block f_upr %}{% endblock %}" href="{% url 'dashboard:report_with_form' 'user_promo_code' %}">Промо коды пользователей</a>
                                     </li>
                                 </ul>
                             </div>
@@ -190,13 +190,13 @@
                             <div id="chart_reports_collapse" class="collapse {% block show_charts %}{% endblock %}" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
                                 <ul class="nav nav-pills flex-column">
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_liked_mov' %}">Топ 10 фильмов по количеству одобрений</a>
+                                        <a class="nav-link {% block c_liked %}{% endblock %}" href="{% url 'dashboard:chart_report' 'top_10_liked_mov' %}">Топ 10 фильмов по количеству одобрений</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_wanted_mov' %}">Топ 10 желаемых фильмов</a>
+                                        <a class="nav-link {% block c_wanted %}{% endblock %}" href="{% url 'dashboard:chart_report' 'top_10_wanted_mov' %}">Топ 10 желаемых фильмов</a>
                                     </li>
                                     <li class="nav-item" style="margin-left: 10%">
-                                        <a class="nav-link" href="{% url 'dashboard:chart_report' 'top_10_watched_mov' %}">Топ 10 фильмов по количеству просмотров</a>
+                                        <a class="nav-link {% block c_watched %}{% endblock %}" href="{% url 'dashboard:chart_report' 'top_10_watched_mov' %}">Топ 10 фильмов по количеству просмотров</a>
                                     </li>
                                 </ul>
                             </div>

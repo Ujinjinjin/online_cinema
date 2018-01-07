@@ -37,7 +37,7 @@ def top_10_liked_mov():
         i += 1
 
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=7,
-               ncol=4, mode="expand", borderaxespad=0.)
+               ncol=3, mode="expand", borderaxespad=0., fontsize=14)
     fig.set_size_inches(19.2, 10.8)
 
     plt.savefig('media/charts/top_10_liked_mov.png')
@@ -74,7 +74,7 @@ def top_10_wanted_mov():
         i += 1
 
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=7,
-               ncol=4, mode="expand", borderaxespad=0.)
+               ncol=3, mode="expand", borderaxespad=0., fontsize=14)
     fig.set_size_inches(19.2, 10.8)
 
     plt.savefig('media/charts/top_10_wanted_mov.png')
@@ -111,7 +111,7 @@ def top_10_watched_mov():
         i += 1
 
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc=7,
-               ncol=4, mode="expand", borderaxespad=0.)
+               ncol=3, mode="expand", borderaxespad=0., fontsize=14)
     fig.set_size_inches(19.2, 10.8)
 
     plt.savefig('media/charts/top_10_watched_mov.png')
@@ -123,27 +123,6 @@ def generate_color():
     symbols = '1234567890ABCDEF'
     color = '#' + ''.join([symbols[random.randint(0, len(symbols) - 1)] for i in range(6)])
     return color
-
-
-def fig2data(fig):
-    # draw the renderer
-    fig.canvas.draw()
-
-    # Get the RGBA buffer from the figure
-    w, h = fig.canvas.get_width_height()
-    buf = numpy.fromstring(fig.canvas.tostring_argb(), dtype=numpy.uint8)
-    buf.shape = (w, h, 4)
-
-    # canvas.tostring_argb give pixmap in ARGB mode. Roll the ALPHA channel to have it in RGBA mode
-    buf = numpy.roll(buf, 3, axis=2)
-    return buf
-
-
-def fig2img(fig):
-    # put the figure pixmap into a numpy array
-    buf = fig2data(fig)
-    w, h, d = buf.shape
-    return Image.fromstring("RGBA", (w, h), buf.tostring())
 
 
 chart_list = {

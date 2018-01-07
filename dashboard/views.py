@@ -20,7 +20,10 @@ def chart_report(request, chart_name):
     chart_list[chart_name]['method']()
     title = chart_list[chart_name]['title']
     link = chart_list[chart_name]['link']
-    return render(request, 'dashboard/chart_report.html', context={'title': title, 'link': link})
+    return render(request, 'dashboard/chart_report.html', context={'title': title,
+                                                                   'link': link,
+                                                                   'chart_name': chart_name,
+                                                                   })
 
 
 def index(request):
@@ -43,6 +46,7 @@ def interactive_report(request, table_name):
         return render(request, 'dashboard/interactive_report.html', context={'title': title,
                                                                              'headers': headers,
                                                                              'table': rows,
+                                                                             'table_name': table_name,
                                                                              })
     else:
         return redirect('dashboard:sign_in')
@@ -62,6 +66,7 @@ def report_with_form(request, table_name):
                                                                            'headers': headers,
                                                                            'table': rows,
                                                                            'admin_section': admin_section,
+                                                                           'table_name': table_name,
                                                                            })
     else:
         return redirect('dashboard:sign_in')
@@ -99,6 +104,7 @@ def simple_report(request, table_name):
         return render(request, 'dashboard/simple_report.html', context={'title': title,
                                                                         'headers': headers,
                                                                         'table': rows,
+                                                                        'table_name': table_name,
                                                                         })
     else:
         return redirect('dashboard:sign_in')

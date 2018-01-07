@@ -1,5 +1,17 @@
 {% extends 'dashboard/base.html' %}
 {% block show_forms %}show{% endblock %}
+{% block f_al %}{% if table_name == 'access_level' %}active{% endif %}{% endblock %}
+{% block f_mem %}{% if table_name == 'member' %}active{% endif %}{% endblock %}
+{% block f_gen %}{% if table_name == 'genre' %}active{% endif %}{% endblock %}
+{% block f_mov %}{% if table_name == 'movie' %}active{% endif %}{% endblock %}
+{% block f_mm %}{% if table_name == 'movie_member' %}active{% endif %}{% endblock %}
+{% block f_mg %}{% if table_name == 'movie_genre' %}active{% endif %}{% endblock %}
+{% block f_img %}{% if table_name == 'image' %}active{% endif %}{% endblock %}
+{% block f_sub %}{% if table_name == 'subscription' %}active{% endif %}{% endblock %}
+{% block f_user %}{% if table_name == 'user' %}active{% endif %}{% endblock %}
+{% block f_mc %}{% if table_name == 'movie_card' %}active{% endif %}{% endblock %}
+{% block f_pr %}{% if table_name == 'promo_code' %}active{% endif %}{% endblock %}
+{% block f_upr %}{% if table_name == 'user_promo_code' %}active{% endif %}{% endblock %}
 
 {% block body %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">

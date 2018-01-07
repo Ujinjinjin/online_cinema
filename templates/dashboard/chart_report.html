@@ -1,5 +1,8 @@
 {% extends 'dashboard/base.html' %}
 {% block show_charts %}show{% endblock %}
+{% block c_liked %}{% if chart_name == 'top_10_liked_mov' %}active{% endif %}{% endblock %}
+{% block c_wanted %}{% if chart_name == 'top_10_wanted_mov' %}active{% endif %}{% endblock %}
+{% block c_watched %}{% if chart_name == 'top_10_watched_mov' %}active{% endif %}{% endblock %}
 
 {% block body %}
     <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
